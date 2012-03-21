@@ -1,0 +1,417 @@
+<!doctype html>
+<html>
+    <head>
+        <title>DCI &#38; Other Patterns</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="Anthony Navarre">
+        <link rel="stylesheet" href="css/styles.css">
+        <link href='http://fonts.googleapis.com/css?family=Advent+Pro:400,700,300' rel='stylesheet' type='text/css'>
+
+        <link href="css/prettify.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body class="impress-not-supported">
+      <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+      </div>
+      <div id="impress">
+
+        <div class="step slide" id="intro" data-x="0" data-y="0">
+          <h1>DCI &#38; Other Patterns</h1>
+          <cite>by: Anthony Navarre</cite>
+        </div>
+
+        <div class="step slide" id="moar" data-x="900" data-y="0">
+          <h4>MOAR Patterns</h4>
+          <p>(mostly example code)</p>
+        </div>
+
+        <div id="defined" class="step slide" data-x="1800" data-y="0">
+          <h4>DCI Defined</h4>
+        </div>
+
+        <div id="data" class="step" data-x="1800" data-y="-80">
+          <p>Data - What the system <b>is</b></p>
+        </div>
+
+        <div id="context" class="step" data-x="1800" data-y="40">
+          <p>Context - Conditions for Data to Interact</p>
+        </div>
+
+        <div id="interaction" class="step" data-x="1800" data-y="160">
+          <p>Interaction - What the sytem <b>does</b></p>
+        </div>
+
+        <div id="origins" class="step slide" data-x="1500" data-y="1000">
+          <img src="images/trygve_reenskaug.jpg" />
+          <img src="images/copelien.gif" width="150" />
+          <h2>Origins of DCI</h2>
+          <h3>Trygve Reenskaug</h3>
+          <h6>&#38; James O. Coplien</h6>
+        </div>
+
+        <div id="oslo" class="step" data-x="1500" data-y="1400">
+          <p>University of Oslo</p>
+        </div>
+
+        <div id="mvc" class="step" data-x="1500" data-y="1500">
+          <p>Father of MVC</p>
+        </div>
+
+        <div id="1930" class="step" data-x="1500" data-y="1600">
+          <p>Born 1930</p>
+        </div>
+
+        <div id="young" class="step" data-x="2900" data-y="100">
+          <h2>Very Young Pattern</h2>
+          <p>(late 2008)</p>
+        </div>
+
+        <div id="problem" class="step" data-x="3000" data-y="400">
+          <blockquote>
+            "Objects are principally about people and their mental models — not polymorphism, coupling and cohesion"
+          </blockquote>
+          <cite>http://www.artima.com/articles/dci_vision.html</cite>
+        </div>
+
+        <div id="goals" class="step" data-x="1500" data-y="3400" data-scale="3" data-rotate="45">
+          <h3>Goals of DCI</h3>
+        </div>
+
+        <div id="goal-1" class="step" data-x="1500" data-y="4200" data-scale="2.5" data-rotate="50">
+          <p>To improve the readability of object-oriented code by giving system behavior first-class status</p>
+        </div>
+
+        <div id="goal-2" class="step" data-x="900" data-y="4700" data-scale="2" data-rotate="55">
+          <p>To cleanly separate code for rapidly changing system behavior (<strong>what the system does</strong>) from code for slowly changing domain knowledge (<strong>what the system is</strong>), instead of combining both in one class interface</p>
+        </div>
+
+        <div id="goal-3" class="step" data-x="650" data-y="5600" data-scale="1.5" data-rotate="60">
+          <p>To help software developers reason about system-level state and behavior instead of only object state and behavior</p>
+        </div>
+
+        <div id="goal-4" class="step" data-x="250" data-y="6000" data-rotate="65">
+          <p>To support an object style of thinking that is close to peoples' mental models, rather than the class style of thinking that overshadowed object thinking early in the history of object-oriented programming languages.</p>
+        </div>
+
+        <div id="tldr" class="step" data-x="750" data-y="7200" data-rotate-x="35" data-rotate-y="-60" data-rotate-z="90">
+          <h2>TL;DR</h2>
+        </div>
+
+        <div id="class-oriented" class="step slide" data-x="200" data-y="7700" data-rotate-x="30" data-rotate-y="-60" data-rotate-z="90">
+          <h3>"Class-oriented" to "Object oriented"</h3>
+        </div>
+
+        <div id="mental-model" class="step slide" data-x="200" data-y="7900" data-rotate-x="30" data-rotate-y="-60" data-rotate-z="90">
+          <!-- brain-->
+          <h2>Capture the end-user's mental model</h2>
+        </div>
+
+
+        <div id="what-if" class="step" data-x="-1000" data-y="1500">
+          <h3>So, instead of...</h3>
+        </div>
+
+        <div id="what-if-example" class="step" data-x="-1000" data-y="2300">
+          <pre>
+user = User.find(params[:user_id])
+shades = Accessory.where(awesome: true)
+user.wear(shades)
+          </pre>
+        </div>
+
+        <div id="what-if-context-example" class="step" data-x="-1000" data-y="3000">
+          <pre>
+WearAwesomeShades.new(params[:user_id])
+          </pre>
+          <img src="http://i.qkme.me/3oeq79.jpg" />
+        </div>
+
+        <div id="fat-skinny" class="step slide" data-x="-1000" data-y="3900" data-scale="1.5" data-rotate-x="45">
+          <blockquote>"The 'Skinny controller; fat model' mantra so often repeated in the Rails community is only half-right"</blockquote>
+          <cite>- Burke Libbey (qualityonrails.com)</cite>
+        </div>
+
+        <div id="fat-controllers" class="step" data-x="-1100" data-y="3700" data-rotate-x="45">
+          <h4>Fat Controllers == antipattern</h4>
+        </div>
+
+        <div id="fat-models" class="step" data-x="-1150" data-y="3900" data-rotate-x="45">
+          <h4>Fat Models == antipattern</h4>
+        </div>
+
+        <div id="bloat" class="step" data-x="-2500" data-y="3900">
+          <h3>bloated models</h3>
+          <p>What the system <b>is</b> changes rarely</p>
+          <p>What the system <b>does</b> changes frequently</p>
+        </div>
+
+        <div id="rails-diagram" class="step slide" data-y="-1000">
+          <h2>Complement to MVC</h2>
+          <br>
+          <br>
+          <img src="images/rails-mvc-diagram.jpg" />
+          <br>
+          <cite>http://mikepackdev.com/blog_posts/24-the-right-way-to-code-dci-in-ruby</cite>
+        </div>
+
+        <div id="fat-on-demand" class="step" data-x="1500" data-y="-1000">
+          <blockquote>"Fat on demand"</blockquote>
+          <cite>- Nick Sutterer</cite>
+        </div>
+
+        <div id="bloat-antipattern" class="step example" data-x="3000" data-y="-1200">
+          <h6>EXAMPLE: Fat Model</h6>
+          <pre class="prettyprint">
+            <code class="lang-ruby">
+class Person < ActiveRecord::Base
+  def eat(food)
+    if food.filling?
+      self.update_attributes(hungry: false)
+    end
+  end
+
+  def study(book)
+    raise PersonNotStudentError unless student?
+    self.knowledge << book.facts
+    self.update_attributes(smart: true)
+  end
+
+  def work
+    raise PersonUnemployedError if unemployed?
+    self.checking_account.deposit self.daily_wages
+    self.update_attributes(sleepy: true, hungry: true)
+  end
+
+  def nap(minutes)
+    sleep minutes*60
+    if minutes > 7*60
+      self.update_attributes(sleepy: false, hungry: true)
+    end
+  end
+
+  def as_json_for_account_balance
+    self.as_json.merge(balance: account.balance)
+  end
+end
+            </code>
+          </pre>
+        </div>
+
+        <div id="fat-pros-cons" class="step" data-x="4000" data-y="-1200">
+          <h6>Pros:</h6>
+          <ul>
+            <li>All in one place</li>
+            <li>Clear</li>
+          </ul>
+          <h6>Cons:</h6>
+          <ul>
+            <li>Bloated</li>
+            <li>Mixed Concerns</li>
+          </ul>
+        </div>
+
+        <div id="mixins" class="step example" data-x="5000" data-y="-1200">
+          <h6>EXAMPLE: Mixins</h6>
+          <pre class="prettyprint">
+            <code class="lang-ruby">
+class Person < ActiveRecord::Base
+  include Student
+  include Employee
+  include AccountJSONRepresenter
+
+  # eat & nap methods still here...
+end
+
+module Student
+  def study(book)
+    raise PersonNotStudentError unless student?
+    self.knowledge << book.facts
+    self.update_attributes(smart: true)
+  end
+end
+
+module Employee
+  def work
+    raise PersonUnemployedError if unemployed?
+    self.checking_account.deposit self.daily_wages
+    self.update_attributes(sleepy: true, hungry: true)
+  end
+end
+
+module PersonWithAccountRepresenter
+  def as_json_for_account_balance
+    self.as_json.merge(balance: account.balance)
+  end
+end
+            </code>
+          </pre>
+        </div>
+
+        <div id="mixins-pros-cons" class="step" data-x="6000" data-y="-1200">
+          <h6>Pros:</h6>
+          <ul>
+            <li>Easier to test</li>
+            <li>Reusable</li>
+          </ul>
+          <h6>Cons:</h6>
+          <ul>
+            <li>More places to check</li>
+            <li>JSON method / module still ugly</li>
+            <li>Multiple Inheritance "Diamond Problem"</li>
+          </ul>
+        </div>
+
+        <div id="strategy-pattern" class="step example" data-x="7000" data-y="-1200">
+          <h6>EXAMPLE: Strategy Pattern</h6>
+          <pre class="prettyprint">
+            <code class="lang-ruby">
+class AccountsController < ApplicationController
+  def show
+    render json: current_user.to_json(AccountJSONStrategy)
+  end
+end
+
+class Person < ActiveRecord::Base
+  @@default_strategy = NapStrategy
+  delegate :balance, to: :account, prefix: true
+
+  # nap & eat methods still here
+
+  def perform(strategy)
+    strategy.call(self)
+  end
+end
+
+module AccountJSONStrategy
+  def call(person)
+    person.as_json.merge(balance: person.account_balance)
+  end
+end
+            </code>
+          </pre>
+        </div>
+
+        <div id="strategy-pros-cons" class="step" data-x="8000" data-y="-1200">
+          <h6>Pros:</h6>
+          <ul>
+            <li>Easy to test</li>
+            <li>JSON representations interchangeable</li>
+            <li>Can support lambdas as new strategies</li>
+          </ul>
+          <h6>Cons:</h6>
+          <ul>
+            <li>Even MOAR places to check</li>
+            <li>Loads of indirection</li>
+            <li>Terminology locked to the pattern</li>
+          </ul>
+        </div>
+
+        <div id="dci" class="step example" data-x="9000" data-y="-1200">
+          <h6>EXAMPLE: DCI</h6>
+          <pre class="prettyprint">
+            <code class="lang-ruby">
+class StudiesController < ApplicationController
+  def create
+    StudyContext.call(current_user, params[:book])
+  end
+end
+
+class StudyContext
+  def self.call(student, book_id)
+    @book = Book.find(book_id)
+
+    @student = student
+    @student.extend Student
+    @student.study(@book)
+  end
+end
+
+class Person < ActiveRecord::Base
+  # nap & eat methods still here
+end
+
+module PersonWithAccountRepresenter
+  def as_json
+    super.as_json.merge(balance: account.balance)
+  end
+end
+
+module Student
+  def study(book)
+    self.knowledge << book.facts
+    self.update_attributes(smart: true)
+  end
+end
+
+module Employee
+  def work
+    self.checking_account.deposit self.daily_wages
+    self.update_attributes(sleepy: true, hungry: true)
+  end
+end
+            </code>
+          </pre>
+        </div>
+
+        <div id="dci-pros-cons" class="step" data-x="10000" data-y="-1200">
+          <h6>Pros:</h6>
+          <ul>
+            <li>Easy to test</li>
+            <li>Clear representation of mental model</li>
+            <li>JSON representations interchangeable</li>
+          </ul>
+          <h6>Cons:</h6>
+          <ul>
+            <li>Even MOAR places to check</li>
+            <li>May necessitate "unextend" (unavailable in Ruby)</li>
+            <li>VERY slow in Ruby</li>
+          </ul>
+        </div>
+
+        <div id="dci-dsl" class="step example" data-x="11000" data-y="-1200">
+          <h6>EXAMPLE: DCI w/ Schizo Gem</h6>
+          <pre class="prettyprint">
+            <code class="lang-ruby">
+class StudiesController < ApplicationController
+  def create
+    current_user.as(Student) do |student|
+      student.study params[:book_id]
+    end
+  end
+end
+            </code>
+          </pre>
+      </div>
+
+      <div id="references" class="step slide" data-x="0" data-y="3000" data-rotate-x="90" data-rotate-y="90">
+        <h6>References</h6>
+        <ul>
+          <li><a href="http://www.artima.com/articles/dci_vision.html">http://www.artima.com/articles/dci_vision.html</a></li>
+          <li><a href="http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction">http://en.wikipedia.org/wiki/Data,_Context,_and_Interaction</a></li>
+          <li><a href="http://en.wikipedia.org/wiki/Trygve_Reenskaug">http://en.wikipedia.org/wiki/Trygve_Reenskaug</a></li>
+          <li><a href="http://wiki.apidesign.org/wiki/DCI">http://wiki.apidesign.org/wiki/DCI</a></li>
+          <li><a href="http://en.wikipedia.org/wiki/Schizophrenia_(object-oriented_programming)">http://en.wikipedia.org/wiki/Schizophrenia_(object-oriented_programming)</a></li>
+          <li><a href="https://github.com/cjbottaro/schizo">https://github.com/cjbottaro/schizo</a></li>
+          <li><a href="http://nicksda.apotomo.de/2011/12/ruby-on-rest-2-representers-and-the-dci-pattern/">http://nicksda.apotomo.de/2011/12/ruby-on-rest-2-representers-and-the-dci-pattern/</a></li>
+          <li><a href="http://en.wikipedia.org/wiki/Diamond_problem">http://en.wikipedia.org/wiki/Diamond_problem</a></li>
+          <li><a href="http://mikepackdev.com/blog_posts/24-the-right-way-to-code-dci-in-ruby">http://mikepackdev.com/blog_posts/24-the-right-way-to-code-dci-in-ruby</a></li>
+          <li><a href="http://victorsavkin.com/post/13966712168/dci-in-ruby">http://victorsavkin.com/post/13966712168/dci-in-ruby</a></li>
+          <li><a href="http://qualityonrails.com/archives/33">http://qualityonrails.com/archives/33</a></li>
+          <li><a href="http://www.infoq.com/presentations/The-DCI-Architecture">http://www.infoq.com/presentations/The-DCI-Architecture</a></li>
+          <li><a href="http://marcricblog.blogspot.com/2007/11/multiple-inheritance-mixins-and-blog_20.html">http://marcricblog.blogspot.com/2007/11/multiple-inheritance-mixins-and-blog_20.html</a></li>
+          <li><a href="http://andrzejonsoftware.blogspot.com/2011/02/dci-and-rails.html">http://andrzejonsoftware.blogspot.com/2011/02/dci-and-rails.html</a></li>
+          <li><a href="http://mikepackdev.com/blog_posts/26-dci-role-injection-in-ruby">http://mikepackdev.com/blog_posts/26-dci-role-injection-in-ruby</a></li>
+        </ul>
+      </div>
+
+      <script type="text/javascript" src="js/impress.js"></script>
+      <script type="text/javascript" src="js/google-code-prettify/prettify.js"></script>
+      <script type="text/javascript">
+        var impressApi = impress();
+            impressApi.init();
+        prettyPrint();
+      </script>
+    </body>
+</html>
+
